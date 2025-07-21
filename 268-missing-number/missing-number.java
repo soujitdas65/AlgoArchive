@@ -1,14 +1,12 @@
 class Solution {
     public int missingNumber(int[] nums) {
-        SortedSet<Integer> n=new TreeSet<>();
-        for (int i=0;i<nums.length;i++) n.add(nums[i]);
-        List<Integer> list=new ArrayList<>();
-        int j=0;
-        for (int i:n) list.add(i);
-        for (int i=1;i<list.size();i++) {
-            if ((list.get(i)-list.get(i-1))!=1) return list.get(i)-1;
+        Arrays.sort(nums);
+        int j=nums.length-1;
+        for (int i=1;i<=j;i++){
+            if ((nums[j]-nums[j-1])!=1) return nums[j]-1;
+            if ((nums[i]-nums[i-1])!=1) return nums[i]-1;       
         }
-        if(list.get(0)==0) return list.get(list.size()-1)+1;
-        return list.get(0)-1;
+        if ((nums[0])!=0) return 0;
+        return nums[nums.length-1]+1;
     }
 }
