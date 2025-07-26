@@ -6,10 +6,8 @@ class Solution {
         for(int i=0;i<l;i++){
             int freq=0;
             if(mpp.containsKey(nums[i])) freq=mpp.get(nums[i]);
+            if(freq+1>l/3 && !list.contains(nums[i])) list.add(nums[i]);
             mpp.put(nums[i],freq+1);
-        }
-        for(int i:mpp.keySet()){
-            if(mpp.get(i)>l/3) list.add(i);
         }
         return list;
     }
