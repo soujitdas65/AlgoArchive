@@ -19,7 +19,6 @@ class Solution {
                     low = mid + 1;
                 else
                     return nums[mid];
-                mid = low + (high - low) / 2;
             }
         }
         return ans;
