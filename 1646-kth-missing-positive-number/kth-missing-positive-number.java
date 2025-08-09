@@ -1,6 +1,6 @@
 class Solution {
     public int findKthPositive(int[] arr, int k) {
-        int low=1,high=arr.length,ans=0;
+        int low=1,high=arr.length;
         while(low<=high){
             int mid=low+(high-low)/2;
             if(arr[mid-1]-mid<k) low=mid+1;
