@@ -12,9 +12,9 @@ class Solution {
             for (int i=0;i<l;i++) {
                 if(sum+weights[i]>mid) {
                     d++;
-                    sum=0;
+                    sum=weights[i];
                 }
-                sum+=weights[i];
+                else sum+=weights[i];
             }
             d++;
             System.out.println(d);
