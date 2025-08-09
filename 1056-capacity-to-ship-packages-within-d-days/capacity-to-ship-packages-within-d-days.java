@@ -8,7 +8,7 @@ class Solution {
         }
         while(low<=high){
             int mid=low+(high-low)/2;
-            long sum=0,d=0;
+            long sum=0,d=1;
             for (int i=0;i<l;i++) {
                 if(sum+weights[i]>mid) {
                     d++;
@@ -16,8 +16,6 @@ class Solution {
                 }
                 else sum+=weights[i];
             }
-            d++;
-            System.out.println(d);
             if(d<=days) high=mid-1;
             else low=mid+1;
         }
