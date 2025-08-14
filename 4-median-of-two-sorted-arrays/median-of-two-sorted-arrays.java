@@ -1,31 +1,27 @@
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int a=nums1.length,b=nums2.length;
-        List<Integer> list=new ArrayList<>();
-        int i=0,j=0;
-        while(i<a && j<b){
-            if(nums1[i]<=nums2[j]) {
-                list.add(nums1[i]);
-                i++;
+        int n1=nums1.length,n2=nums2.length;
+        if(n1>n2) return findMedianSortedArrays(nums2,nums1);
+        int n=n1+n2;
+        int left=(n1+n2+1)/2;
+        int low=0,high=n1;
+        while(low<=high){
+            int mid1=low+(high-low)/2;
+            int mid2=left-mid1;
+            int l1=(mid1>0)?nums1[mid1-1]:Integer.MIN_VALUE;
+            int l2=(mid2>0)?nums2[mid2-1]:Integer.MIN_VALUE;
+            int r1=(mid1<n1)?nums1[mid1]:Integer.MAX_VALUE;
+            int r2=(mid2<n2)?nums2[mid2]:Integer.MAX_VALUE;
+            if(l1<=r2 && l2<=r1){
+                if(n%2==1) return Math.max(l1,l2);
+                else{
+                    return
+                    ((double)(Math.max(l1,l2)+Math.min(r1,r2)))/2.0;
+                }
             }
-            else {
-                list.add(nums2[j]);
-                j++;
-            }
+            else if(l2>r1)low=mid1+1;
+            else high=mid1-1;
         }
-        while(i<a){
-            list.add(nums1[i]);
-            i++;
-        }
-        while(j<b){
-            list.add(nums2[j]);
-            j++;
-        }
-        if((a+b)%2==1) return list.get((a+b-1)/2);
-        else {
-            int x=list.get((a+b)/2);
-            int y=list.get((a+b)/2-1);
-            return (x+y)/2.0;
-        }
+        return 0;
     }
 }
