@@ -1,11 +1,10 @@
 class Solution {
     public boolean rotateString(String s, String goal) {
-        int l=s.length();
-        while(l-->0){
-            StringBuilder first=new StringBuilder(s.substring(0,1));
-            StringBuilder rest=new StringBuilder(s.substring(1));
-            s=rest.append(first).toString();
-            if(s.equals(goal)) return true;
+        int i=0;
+        while(i++<s.length()){
+            StringBuilder first=new StringBuilder(s.substring(0,i));
+            StringBuilder rest=new StringBuilder(s.substring(i));
+            if(rest.append(first).toString().equals(goal)) return true;
         }
         return false;
     }
