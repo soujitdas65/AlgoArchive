@@ -6,17 +6,16 @@ class Solution {
           if(mpp.containsKey(s.charAt(i))) freq=mpp.get(s.charAt(i));
           mpp.put(s.charAt(i),freq+1);
         }
-        String ans="";
-        int i=0;
-        while(i++<s.length()){
+        StringBuilder ans=new StringBuilder();
+        int i=s.length();
+        while(i-->0){
             for(char ele:mpp.keySet()){
                 int n=mpp.get(ele);
-                if(n==i){
-                    int num=mpp.get(ele);
-                    while(num-->0) ans=ele+ans;
+                if(n==i+1){
+                    while(n-->0) ans.append(ele);
                 }
             }
         } 
-        return ans;
+        return ans.toString();
     }
 }
