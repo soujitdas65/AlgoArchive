@@ -10,11 +10,11 @@ class Solution {
         roman.put('M',1000);
 
         int sum=0;
-        for(int i=0;i<s.length();i++){
-            if(i+1<s.length() && roman.get(s.charAt(i))<roman.get(s.charAt(i+1)))
-            sum+=roman.get(s.charAt(i+1))-roman.get(s.charAt(i++));
+        for(int i=0;i<s.length()-1;i++){
+            if(roman.get(s.charAt(i))<roman.get(s.charAt(i+1)))
+            sum-=roman.get(s.charAt(i));
             else sum+=roman.get(s.charAt(i));
         }
-        return sum;
+        return sum+roman.get(s.charAt(s.length()-1));
     }
 }
