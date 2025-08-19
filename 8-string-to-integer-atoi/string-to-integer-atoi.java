@@ -1,28 +1,28 @@
 class Solution {
     public int myAtoi(String s) {
-        if(s.length()==0) return 0;
-        StringBuilder str=new StringBuilder();
+        int l=s.length();
+        if(l==0) return 0;
         int i=0;
-        while(i<s.length() && s.charAt(i)==' ')i++;
-        if(i<s.length() && (s.charAt(i)=='-' || s.charAt(i)=='+'))
-        str.append(s.charAt(i++));
-        boolean blank=true;
-        while(i<s.length()){
-            if(s.charAt(i)>='0' && s.charAt(i)<='9'){
-                str.append(s.charAt(i++));
-                blank=false;
-            }
-            else break;
+        while(i<l && s.charAt(i)==' ') i++;
+        if(i-l==0) return 0;
+        int sign=1;
+        if(s.charAt(i)=='+') {
+            sign=1;
+            i++;
         }
-        if(blank==true) return 0;
-        int result;
-        try{
-            result=Integer.valueOf(str.toString());
-        }catch(Exception e){
-            if(str.length()!=0 && str.charAt(0)=='-') 
+        else if(s.charAt(i)=='-') {
+            sign=-1;
+            i++;
+        }
+        long ans=0;
+        while(i<l && Character.isDigit(s.charAt(i))){
+            ans=ans*10+s.charAt(i)-'0';
+            i++;
+            if(sign*ans>Integer.MAX_VALUE) 
+            return Integer.MAX_VALUE;
+            else if(sign*ans<Integer.MIN_VALUE) 
             return Integer.MIN_VALUE;
-            else return Integer.MAX_VALUE;
         }
-        return result;
+        return sign*(int)ans;
     }
 }
