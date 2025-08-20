@@ -12,10 +12,10 @@ class Solution {
         }
         for(int j=n-1;j>=0;j--){
             for(int i=m-1;i>=0;i--){
-                if(j==0){
+                if(j==0 && matrix[i][j]!=0){
                     if(c==0) matrix[i][j]=0;
                 }
-                else{
+                else if(matrix[i][j]!=0){
                     if(matrix[0][j]==0 || matrix[i][0]==0) 
                     matrix[i][j]=0;
                 }
