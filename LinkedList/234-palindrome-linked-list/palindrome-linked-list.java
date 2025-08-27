@@ -11,10 +11,6 @@
 class Solution {
     public boolean isPalindrome(ListNode head) {
         if(head.next==null) return true;
-        if(head.next.next==null){
-            if(head.val==head.next.val) return true;
-            else return false;
-        }
         ListNode slow=head, fast=head, left=null, right=head.next;
         while(fast!=null && fast.next!=null){
             fast=fast.next.next;
