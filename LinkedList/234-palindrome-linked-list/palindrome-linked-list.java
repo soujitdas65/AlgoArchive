@@ -19,18 +19,27 @@ class Solution {
             slow=right;
             right=right.next;
         }
-        if(fast==null){
-            while(left!=null || slow!=null){
+        right=slow;
+        ListNode mid=left;
+        if(fast==null){ //even
+            while(left!=null && slow!=null){
                 if(slow.val!=left.val) return false;
                 slow=slow.next;
                 left=left.next;
+                mid.next=right;
+                right=mid;
+                mid=left;
             }
         }
-        else {
-            while(left!=null && right!=null){
-                if(right.val!=left.val) return false;
+        else { //odd
+            slow=slow.next;
+            while(left!=null && slow!=null){
+                if(slow.val!=left.val) return false;
                 left=left.next;
-                right=right.next;
+                slow=slow.next;
+                mid.next=right;
+                right=mid;
+                mid=left;
             }
         }
         return true;
