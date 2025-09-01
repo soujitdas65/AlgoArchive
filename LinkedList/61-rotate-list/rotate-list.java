@@ -13,15 +13,15 @@ class Solution {
         if(head==null || head.next==null) return head;
         ListNode temp=head;
         int l=findLength(temp);
-        if(l!=0) k=k%l;
-        while(k-->0){
-            while(temp.next.next!=null) temp=temp.next;
-            temp.next.next=head;
-            head=temp.next;
-            temp.next=null;
-            temp=head;
-        }
-        return head;
+        if(l!=0) k=l-k%l-1;
+        if(k==l-1) return head;
+        while(k-->0) temp=temp.next;
+        ListNode dummyHead=temp.next;
+        temp.next=null;
+        temp=dummyHead;
+        while(temp.next!=null) temp=temp.next;
+        temp.next=head;
+        return dummyHead;
     }
     int findLength(ListNode start) {
         int cnt=0;
