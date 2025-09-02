@@ -1,29 +1,25 @@
 class Solution {
     public int myAtoi(String s) {
         s=s.trim();
-        int l=s.length(), i=0, sign=1;
-        if(l==0) return 0;
-        if(s.charAt(i)=='+') {
-            sign=1;
-            i++;
-        }
-        else if(s.charAt(i)=='-') {
+        if(s.length()==0) return 0;
+        int sign=1,i=0;
+        if(s.charAt(i)=='-') {
             sign=-1;
             i++;
         }
-        long ans=0;
-        return sign*(int)extractNumbers(s,sign,i,l,ans);
-    }
-    long extractNumbers(String s, int sign, int index, int length, long ans) {
-        if(index==length) return ans;
-        if(Character.isDigit(s.charAt(index))) {
-            ans=ans*10+s.charAt(index)-'0';
-            if(sign*ans>Integer.MAX_VALUE) 
-            return Integer.MAX_VALUE;
-            else if(sign*ans<Integer.MIN_VALUE) 
-            return Integer.MIN_VALUE;
+        else if(s.charAt(i)=='+') {
+            sign=1;
+            i++;
         }
-        else return ans;
-        return extractNumbers(s, sign, index+1, length, ans);
+        long ans=0;
+        return sign*(int)getNum(i,s,ans,sign);
+    }
+    long getNum(int i, String s, long ans, int sign) {
+        if(i>=s.length() || !Character.isDigit(s.charAt(i)))
+        return ans;
+        ans=ans*10+s.charAt(i)-'0';
+        if(sign*ans>Integer.MAX_VALUE) return Integer.MAX_VALUE;
+        if(sign*ans<Integer.MIN_VALUE) return Integer.MIN_VALUE;
+        return getNum(i+1,s,ans,sign);
     }
 }
