@@ -1,11 +1,8 @@
 class Solution {
     public int myAtoi(String s) {
-        int l=s.length();
+        s=s.trim();
+        int l=s.length(), i=0, sign=1;
         if(l==0) return 0;
-        int i=0;
-        while(i<l && s.charAt(i)==' ') i++;
-        if(i-l==0) return 0;
-        int sign=1;
         if(s.charAt(i)=='+') {
             sign=1;
             i++;
@@ -15,14 +12,18 @@ class Solution {
             i++;
         }
         long ans=0;
-        while(i<l && Character.isDigit(s.charAt(i))){
-            ans=ans*10+s.charAt(i)-'0';
-            i++;
+        return sign*(int)extractNumbers(s,sign,i,l,ans);
+    }
+    long extractNumbers(String s, int sign, int index, int length, long ans) {
+        if(index==length) return ans;
+        if(Character.isDigit(s.charAt(index))) {
+            ans=ans*10+s.charAt(index)-'0';
             if(sign*ans>Integer.MAX_VALUE) 
             return Integer.MAX_VALUE;
             else if(sign*ans<Integer.MIN_VALUE) 
             return Integer.MIN_VALUE;
         }
-        return sign*(int)ans;
+        else return ans;
+        return extractNumbers(s, sign, index+1, length, ans);
     }
 }
