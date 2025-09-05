@@ -1,18 +1,14 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result=new ArrayList<>();
-        Stack<Integer> st=new Stack<>();
-        generate(0,nums,st,result);
-        return result;
-    }
-    void generate(int i,int[] nums,Stack<Integer> st,List<List<Integer>> result) {
-        if(i==nums.length){
-            result.add(new ArrayList<>(st));
-            return;
+
+        for(int i=0;i<(1<<nums.length);i++) {
+            List<Integer> list=new ArrayList<>();
+            for(int j=0;j<nums.length;j++) {
+                if((i & (1<<j))!=0) list.add(nums[j]);
+            }
+            result.add(list);
         }
-        generate(i+1,nums,st,result);//Choice:skip
-        st.push(nums[i]);//Choice:choose
-        generate(i+1,nums,st,result);
-        st.pop();
+        return result;
     }
 }
