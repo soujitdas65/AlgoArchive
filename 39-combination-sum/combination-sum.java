@@ -13,7 +13,7 @@ class Solution {
         //skip 
         find(result,st,i+1,nums,target);
         //include 
-        if(target>=0) {
+        if(target-nums[i]>=0) {
             target-=nums[i];
             st.push(nums[i]);
             find(result,st,i,nums,target);
