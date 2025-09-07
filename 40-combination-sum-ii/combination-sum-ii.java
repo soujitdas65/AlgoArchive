@@ -2,20 +2,22 @@ class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         List<List<Integer>> result=new ArrayList<>();
         Arrays.sort(candidates);
-        find(result,new ArrayList<>(),0,candidates,target);
+        findSum(result,new Stack<>(),0,candidates,target);
         return result;
     }
-    void find(List<List<Integer>> result,List<Integer> list,int start,int[] nums,int target) {
-        if(target==0) {
-            result.add(new ArrayList<>(list));
+    void findSum(List<List<Integer>> result,Stack<Integer> st,int i,int[] nums,int target) {
+        if(i>=nums.length) {
+            if(target==0) result.add(new ArrayList<>(st));
             return;
         }
-        for(int i=start;i<nums.length;i++) {
-            if(i>start && nums[i-1]==nums[i]) continue;
-            if(nums[i]>target) break;
-            list.add(nums[i]);
-            find(result,list,i+1,nums,target-nums[i]);
-            list.remove(list.size()-1);
+        //include
+        if(target>=nums[i]) {
+            st.push(nums[i]);
+            findSum(result,st,i+1,nums,target-nums[i]);
+            st.pop();
         }
+        //skippingDuplicates
+        while(i+1<nums.length && nums[i]==nums[i+1]) i++;
+        findSum(result,st,i+1,nums,target);
     }
 }
