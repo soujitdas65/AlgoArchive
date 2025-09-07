@@ -6,18 +6,17 @@ class Solution {
         findSum(result,new Stack<>(),0,nums,k,n);
         return result;
     }
-    void findSum(List<List<Integer>> result,Stack<Integer> st,int start,int nums[],int k,int n) {
+    void findSum(List<List<Integer>> result,Stack<Integer> st,int i,int[] nums,int k,int n) {
         if(st.size()==k && n==0) {
             result.add(new ArrayList<>(st));
             return;
         }
-        if(n<0 || st.size()>k) return;
-        for(int i=start;i<nums.length;i++) {
-            if(i>start && nums[i]==nums[i-1]) continue;
-            //include
-            st.push(nums[i]);
-            findSum(result,st,i+1,nums,k,n-nums[i]);
-            st.pop();
-        }
+        if(i>=nums.length || st.size()>k || n<0) return;
+        //include
+        st.push(nums[i]);
+        findSum(result,st,i+1,nums,k,n-nums[i]);
+        st.pop();
+        //skip
+        findSum(result,st,i+1,nums,k,n);
     }
 }
