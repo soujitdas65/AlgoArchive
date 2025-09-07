@@ -8,6 +8,7 @@ class Solution {
     void find(List<List<Integer>> result,List<Integer> list,int start,int[] nums,int target) {
         if(target==0) {
             result.add(new ArrayList<>(list));
+            return;
         }
         for(int i=start;i<nums.length;i++) {
             if(i>start && nums[i-1]==nums[i]) continue;
