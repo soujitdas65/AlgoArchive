@@ -11,9 +11,9 @@ class Solution {
             result.add(new ArrayList<>(st));
             return;
         }
+        if(n<0 || st.size()>k) return;
         for(int i=start;i<nums.length;i++) {
             if(i>start && nums[i]==nums[i-1]) continue;
-            if(nums[i]>n || st.size()>k) break;
             //include
             st.push(nums[i]);
             findSum(result,st,i+1,nums,k,n-nums[i]);
