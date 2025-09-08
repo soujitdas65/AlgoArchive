@@ -7,14 +7,14 @@ class Solution {
         return result;
     }
     void findSum(List<List<Integer>> result,Stack<Integer> st,int i,int[] nums,int k,int n) {
-        if(st.size()==k && n==0) {
+        if(k==0 && n==0) {
             result.add(new ArrayList<>(st));
             return;
         }
-        if(i>=nums.length || st.size()>k || n<0) return;
+        if(i>=nums.length) return;
         //include
         st.push(nums[i]);
-        findSum(result,st,i+1,nums,k,n-nums[i]);
+        findSum(result,st,i+1,nums,k-1,n-nums[i]);
         st.pop();
         //skip
         findSum(result,st,i+1,nums,k,n);
