@@ -10,9 +10,9 @@ class Solution {
     }
     boolean wordSearch(char[][]board,int i,int j,String word,int k) {
         if(k==word.length()) return true;
-        if(word.length()==1 && board[i][j]==word.charAt(k)) return true;
         boolean flag=false;
         if(word.charAt(k)==board[i][j]){
+            if(word.length()==1) return true;
             char temp=board[i][j];
             board[i][j]=' ';
             if(i>=1) flag=flag || wordSearch(board,i-1,j,word,k+1);
