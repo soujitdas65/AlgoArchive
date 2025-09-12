@@ -21,17 +21,11 @@ class Solution {
     boolean possible(char ch,char[][] board,int i,int j) {
         for(int k=0;k<9;k++) {
             if(board[i][k]==ch) return false;
-        }
-        for(int k=0;k<9;k++) {
             if(board[k][j]==ch) return false;
+            int a=(i/3)*3;
+            int b=(j/3)*3;
+            if(board[a+(k/3)][b+(k%3)]==ch) return false;
         } 
-        int p=(i/3)*3;
-        int q=(j/3)*3;
-        for(int a=p;a<p+3;a++) {
-            for(int b=q;b<q+3;b++) {
-                if(board[a][b]==ch) return false;
-            }
-        }
         return true;
     }
 }
