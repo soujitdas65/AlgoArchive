@@ -1,15 +1,12 @@
 class Solution {
     public int[] singleNumber(int[] nums) {
-        int[] ans=new int[2];
-        HashMap<Integer,Integer> mpp=new HashMap<>();
-        for(int i:nums) mpp.put(i,mpp.getOrDefault(i,0)+1);
-        int j=0;
-        for(int i:mpp.keySet()) {
-            if(mpp.get(i)==1) {
-                ans[j]=i;
-                j++;
-            }
+        int xor=0,xor1=0,xor2=0;
+        for(int i:nums) xor^=i;
+        int check=(xor ^ (xor-1)) & xor;
+        for(int i:nums) {
+            if((i & check)==0) xor1^=i;
+            else xor2^=i;
         }
-        return ans;
+        return new int[]{xor1,xor2};
     }
 }
