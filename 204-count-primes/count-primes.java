@@ -4,7 +4,7 @@ class Solution {
         for(int i=3;i<n;i+=2) num[i]=1;
         for(int i=3;i*i<n;i+=2) {
             if(num[i]==1) {
-                for(int j=i*i;j<n;j+=i) num[j]=0;
+                for(int j=i*i;j<n;j+=2*i) num[j]=0;
             }
         }
         int cnt=0;
