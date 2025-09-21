@@ -3,21 +3,26 @@ class MinStack {
     long min;
     public MinStack() {
         st=new Stack<>();
-        min=Long.MAX_VALUE;
     }
     public void push(int val) {
-        long ele=(long)val;
-        if(st.empty()) min=ele;
-        st.push(ele-min);
-        if(min>ele) min=ele;
+        if(st.empty()) {
+            st.push((long)val);
+            min=val;
+        }
+        else if(val<min) {
+            st.push((long)2*val-min);
+            min=val;
+        }
+        else st.push((long)val);
     }
     public void pop() {
-        if(st.peek()<0) min=min-st.peek();
-        st.pop();
+        long top=st.pop();
+        if(top<min) min=2*min-top;
     }
     public int top() {
-        if(st.peek()<0) return (int)min;
-        return (int)(min+st.peek());
+        long ele=st.peek();
+        if(ele<min) return (int)min;
+        return (int)ele;
     }
     public int getMin() {
         return (int)min;
