@@ -1,26 +1,21 @@
 class Solution {
     public int largestRectangleArea(int[] heights) {
         int len=heights.length;
+        long area=Integer.MIN_VALUE;
         int[] pse=new int[len];
-        Stack<Integer> left=new Stack<>();
+        Stack<Integer> st=new Stack<>();
         for(int i=0;i<heights.length;i++) {
-            while(!left.empty() && heights[left.peek()]>=heights[i]) left.pop();
-            pse[i]=(left.empty()) ? -1:left.peek();
-            left.push(i);
+            while(!st.empty() && heights[st.peek()]>=heights[i]) {
+                int temp=st.pop();
+                area=Math.max(area,(long)(heights[temp]*(i-pse[temp]-1)));
+            }
+            pse[i]=(st.empty()) ? -1:st.peek();
+            st.push(i);
         }
-        int[] nse=new int[len];
-        Stack<Integer> right=new Stack<>();
-        for(int i=heights.length-1;i>=0;i--) {
-            while(!right.empty() && heights[right.peek()]>=heights[i]) right.pop();
-            nse[i]=(right.empty())? len:right.peek();
-            right.push(i);
+        while(!st.empty()) {
+            int temp=st.pop();
+            area=Math.max(area,(long)(heights[temp]*(len-pse[temp]-1)));
         }
-        long largestArea=Integer.MIN_VALUE;
-        for(int i=0;i<heights.length;i++) {
-            long breadth=(long)(nse[i]-pse[i]-1);
-            long area=breadth*heights[i];
-            largestArea=Math.max(area,largestArea);
-        } 
-        return (int)largestArea;
+        return (int)area;
     }
 }
