@@ -2,8 +2,8 @@ class Solution {
     public int maximalRectangle(char[][] matrix) {
         long area=0;
         int[] arr=new int[matrix[0].length];
+        Stack<Integer> st=new Stack<>();
         for(int i=0;i<matrix.length;i++) {
-            Stack<Integer> st=new Stack<>();
             for(int j=0;j<matrix[0].length;j++) {
                 if(matrix[i][j]=='1') arr[j]+=1;
                 else arr[j]=0;
