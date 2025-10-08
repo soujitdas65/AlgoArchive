@@ -51,10 +51,8 @@ class LRUCache {
         temp.prev=node;
     }
     void deleteNode(Node node) {
-        Node front=node.next;
-        Node back=node.prev;
-        if(back!=null) back.next=front;
-        if(front!=null) front.prev=back;
+        if(node.prev!=null) node.prev.next=node.next;
+        if(node.next!=null) node.next.prev=node.prev;
     }
 }
 
