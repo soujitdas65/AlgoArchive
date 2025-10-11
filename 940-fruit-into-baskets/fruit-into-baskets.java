@@ -4,7 +4,7 @@ class Solution {
         int i=0,j=0,maxLen=0;
         while(j<fruits.length) {
             mpp.put(fruits[j],mpp.getOrDefault(fruits[j],0)+1);
-            if(mpp.size()>2) {
+            while(mpp.size()>2) {
                 mpp.put(fruits[i],mpp.getOrDefault(fruits[i],0)-1);
                 if(mpp.get(fruits[i])==0) mpp.remove(fruits[i]);
                 i++;
