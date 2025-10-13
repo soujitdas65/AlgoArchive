@@ -5,9 +5,9 @@ class Solution {
     int nice(int[] nums, int k) {
         int i=0,j=0,cnt=0,ans=0;
         while(j<nums.length) {
-            if((nums[j] & 1)==1) cnt++;
+            cnt+=nums[j] & 1;
             while(cnt>k) {
-                if((nums[i] & 1)==1) cnt--;
+                cnt-=nums[i] & 1;
                 i++;
             }
             ans+=j-i+1;
