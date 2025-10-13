@@ -6,10 +6,8 @@ class Solution {
             if(ch=='a') a=i;
             else if(ch=='b') b=i;
             else c=i;
-            if(a!=-1 && b!=-1 && c!=-1) {
-                int min=Math.min(a,Math.min(b,c));
-                cnt+=min+1;
-            }
+            if(a>=0 && b>=0 && c>=0) 
+            cnt+=Math.min(a,Math.min(b,c))+1;
         }
         return cnt;
     }
