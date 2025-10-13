@@ -1,12 +1,18 @@
 class Solution {
     public int numSubarraysWithSum(int[] nums, int goal) {
-        HashMap<Integer,Integer> mpp=new HashMap<>();
-        mpp.put(0,1);
-        int sum=0,cnt=0;
-        for(int i=0;i<nums.length;i++) {
-            sum+=nums[i];
-            if(mpp.containsKey(sum-goal)) cnt+=mpp.get(sum-goal);
-            mpp.put(sum,mpp.getOrDefault(sum,0)+1);
+        return generate(nums,goal)-generate(nums,goal-1);
+    }
+    int generate(int[] nums,int goal) {
+        if(goal<0) return 0;
+        int i=0,j=0,sum=0,cnt=0;
+        while(j<nums.length) {
+            sum+=nums[j];
+            while(sum>goal) {
+                sum-=nums[i];
+                i++;
+            }
+            cnt+=j-i+1;
+            j++;
         }
         return cnt;
     }
