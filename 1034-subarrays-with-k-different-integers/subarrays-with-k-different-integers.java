@@ -3,6 +3,7 @@ class Solution {
         return goodSubArray(nums,k)-goodSubArray(nums,k-1);
     }
     int goodSubArray(int[] nums, int k) {
+        if(k==0) return 0;
         HashMap<Integer,Integer> mpp=new HashMap<>();
         int i=0,j=0,cnt=0;
         while(j<nums.length) {
